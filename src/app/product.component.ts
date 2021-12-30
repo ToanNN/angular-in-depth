@@ -7,6 +7,9 @@ import { Model } from "./model/repository.model";
   templateUrl: "product.component.html"
 })
 export class ProductComponent {
+  constructor() {
+    this.selectedProduct = undefined;
+  }
   model: Model = new Model();
   getProduct(key: number): Product | undefined {
     return this.model.getProduct(key);
@@ -14,5 +17,14 @@ export class ProductComponent {
   getProducts(): Product[] {
     return this.model.getProducts();
   }
-  selectedProduct: Product | undefined;
+
+  getSelected(product: Product): boolean {
+    return this.selectedProduct == product.name;
+  }
+  setSelectedProduct(target: EventTarget | null) {
+    let htmlInput = target as HTMLInputElement;
+    this.selectedProduct = htmlInput.value;
+  }
+
+  selectedProduct: string | undefined;
 }
