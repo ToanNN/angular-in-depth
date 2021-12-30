@@ -1,6 +1,6 @@
 <div class="m-2">
   <div class="bg-info text-white p-2">
-    Selected Product: {{ selectedProduct || "None" }}
+    Selected Product: {{ cooko.value || "None" }}
   </div>
   <table class="table table-sm table-bordered">
     <tr>
@@ -22,5 +22,81 @@
   <div class="form-group">
     <label>Product Name</label>
     <input class="form-control" (input)="setSelectedProduct($event.target)" />
+
+    <label>Product Name via Template reference</label>
+    <input class="form-control" #cooko [(ngModel)]="selectedProduct" />
   </div>
 </div>
+
+<div class="m-2">
+  <div class="bg-info text-white mb-2 p-2">Model Data: {{ jsonProduct }}</div>
+  <div class="form-group">
+    <label>Name</label>
+    <input class="form-control" [(ngModel)]="newProduct.name" />
+  </div>
+  <div class="form-group">
+    <label>Category</label>
+    <input class="form-control" [(ngModel)]="newProduct.category" />
+  </div>
+  <div class="form-group">
+    <label>Price</label>
+    <input class="form-control" [(ngModel)]="newProduct.price" />
+  </div>
+  <button class="btn btn-primary" (click)="addProduct(newProduct)">
+    Create
+  </button>
+</div>
+
+<form novalidate (ngSubmit)="submitForm(form)" #form="ngForm">
+  <div
+    class="bg-danger text-white p-2 mb-2"
+    *ngIf="submittingForm && form.invalid"
+  >
+    There are problems with the form
+  </div>
+  <div class="form-group">
+    <label>Name:</label>
+    <input
+      class="form-control"
+      name="name"
+      [(ngModel)]="newProduct.name"
+      required
+      minlength="6"
+      pattern="^[A-Za-z]+$"
+      #name="ngModel"
+    />
+    <ul class="text-danger list-unstyled" *ngIf="name.dirty && name.invalid">
+      <li *ngFor="let error of getValidationMessages(name, 'name')">
+        {{ error }}
+      </li>
+    </ul>
+  </div>
+  <div class="form-group">
+    <label>Price</label>
+    <input
+      class="form-control"
+      name="price"
+      [(ngModel)]="newProduct.price"
+      #price="ngModel"
+      required
+      pattern="^[0-9\.]+$"
+    />
+    <ul
+      class="text-danger list-unstyled"
+      *ngIf="(submittingForm || price.dirty) && price.invalid"
+    >
+      <li *ngFor="let error of getValidationMessages(price)">
+        {{ error }}
+      </li>
+    </ul>
+  </div>
+
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="form.invalid"
+    [class.btn-secondary]="form.invalid"
+  >
+    Create
+  </button>
+</form>
