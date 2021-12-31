@@ -28,7 +28,12 @@
     class="form-group"
     *ngFor="let control of productFormGroup.productControls"
   >
-    <label [pa-sw]="'bg-danger'">{{ control.label }}</label>
+    <label
+      [pa-sw]="'bg-danger'"
+      [pa-product]="newProduct"
+      (pa-category)="newProduct.category = $event"
+      >{{ control.label }}</label
+    >
     <input
       class="form-control"
       name="{{ control.modelProperty }}"
