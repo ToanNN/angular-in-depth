@@ -8,10 +8,10 @@ import { Model } from "./model/repository.model";
   templateUrl: "product.component.html"
 })
 export class ProductComponent {
-  constructor() {
+  constructor(private model: Model) {
     this.selectedProduct = undefined;
   }
-  model: Model = new Model();
+
   getProduct(key: number): Product | undefined {
     return this.model.getProduct(key);
   }

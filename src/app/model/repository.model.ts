@@ -1,13 +1,14 @@
 import { Product } from "./product.model";
 import { SimpleDataSource } from "./datasource.model";
-
+import { Injectable } from "@angular/core";
+@Injectable()
 export class Model {
-  private dataSource: SimpleDataSource;
+
   private products: Product[];
   private locator = (p: Product, id: number) => p.id == id;
 
-  constructor() {
-    this.dataSource = new SimpleDataSource();
+  constructor(private dataSource: SimpleDataSource) {
+
     this.products = new Array<Product>();
     this.dataSource.getData().forEach(p => this.products.push(p));
   }
@@ -32,6 +33,7 @@ export class Model {
   }
 
   deleteProduct(id: number) {
+
     let index = this.products.findIndex(p => this.locator(p, id));
     if (index > -1) {
       this.products.splice(index, 1);

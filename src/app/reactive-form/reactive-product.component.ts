@@ -8,7 +8,7 @@ import { ProductFormGroup } from "./reactive-form.model";
   templateUrl: "reactive-product.component.html"
 })
 export class ReactiveProductComponent {
-  model: Model = new Model();
+  constructor(private model: Model) { }
   productFormGroup: ProductFormGroup = new ProductFormGroup();
   getProduct(key: number): Product | undefined {
     return this.model.getProduct(key);
