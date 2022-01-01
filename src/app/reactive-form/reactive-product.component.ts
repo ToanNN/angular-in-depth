@@ -30,4 +30,7 @@ export class ReactiveProductComponent {
       .forEach(c => this.newProduct[c] = this.productFormGroup.controls[c].value)
   }
 
+  //structural directive
+  showTable: boolean = false;
+
 }

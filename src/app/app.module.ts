@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ProductAttributeSuccessWhiteText } from './directives/addsuccsswhitetext.directive';
 import { ProductComponent } from './product.component';
 import { ReactiveProductComponent } from './reactive-form/reactive-product.component';
+import { PaStructureDirective } from './structuralDirectives/pa.structure.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     ReactiveProductComponent,
-    ProductAttributeSuccessWhiteText
+    ProductAttributeSuccessWhiteText,
+    PaStructureDirective
   ],
   imports: [
     BrowserModule,

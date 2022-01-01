@@ -1,4 +1,4 @@
-import { Attribute, Directive, ElementRef, EventEmitter, Input, Output, SimpleChange } from "@angular/core";
+import { Attribute, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, SimpleChange } from "@angular/core";
 
 import { Product } from "../model/product.model";
 
@@ -8,6 +8,7 @@ import { Product } from "../model/product.model";
 export class ProductAttributeSuccessWhiteText {
 
   @Input("pa-sw")
+  @HostBinding("class")
   hostClass: string;
 
   @Input("pa-product")
@@ -18,13 +19,15 @@ export class ProductAttributeSuccessWhiteText {
   constructor(private element: ElementRef) {
     this.hostClass = "";
     this.product = undefined;
-    this.element.nativeElement.addEventListener("click", () => {
-      if (this.product) {
-        this.click.emit(this.product.category ?? "");
-      }
-    })
+
   }
 
+  @HostListener('click')
+  triggerCustomEvent() {
+    if (this.product != null) {
+      this.click.emit(this.product.category);
+    }
+  }
   ngOnInit() {
     this.element.nativeElement.classList.add(this.hostClass || "bg-success", "text-white")
   }

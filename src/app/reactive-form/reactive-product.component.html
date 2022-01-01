@@ -58,3 +58,17 @@
     Create
   </button>
 </form>
+
+<div class="m-2">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="showTable" />
+      Show Table
+    </label>
+  </div>
+  <table *paIf="showTable" class="table table-sm table-bordered table-striped">
+    <tr>
+      This is whow
+    </tr>
+  </table>
+</div>
